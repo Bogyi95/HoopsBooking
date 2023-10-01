@@ -1,8 +1,9 @@
 {% if user.is_authenticated %}
 <div class="alert alert-success" role="alert">
-    <h3>Welcome {{ user.username }}!</h3>
-    <a href="{% url 'logout' %}">Logout?</a>
+    <a href="{% url 'home' %}">Welcome {{ user.username }}!</a>
+
 </div>
+<a href="{% url 'logout' %}" style="text-align: right;" ;>Logout?</a>
 
 <head>
     <meta charset="UTF-8">
@@ -17,6 +18,12 @@
     <div class="container mt-5">
         <!-- Button to Trigger the Pop-up -->
         <button id="show-create-team-modal" class="btn btn-primary">Create Team</button>
+
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Error:</strong> {{ form.errors.name }}
+        </div>
+        {% endif %}
 
         <!-- Team Creation Pop-up Modal -->
         <div id="create-team-modal" class="modal" tabindex="-1">
@@ -43,6 +50,15 @@
             </div>
         </div>
     </div>
+
+
+    <h1>List of Teams</h1>
+
+    <ul>
+        {% for team in teams %}
+        <li>{{ team.name }}</li>
+        {% endfor %}
+    </ul>
 
     <!-- Include Bootstrap JavaScript and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

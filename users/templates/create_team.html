@@ -14,6 +14,12 @@
         <!-- Button to Trigger the Pop-up -->
         <button id="show-create-team-modal" class="btn btn-primary">Create Team</button>
 
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Error:</strong> {{ form.errors.name }}
+        </div>
+        {% endif %}
+
         <!-- Team Creation Pop-up Modal -->
         <div id="create-team-modal" class="modal" tabindex="-1">
             <div class="modal-dialog">
