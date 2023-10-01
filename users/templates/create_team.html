@@ -1,8 +1,5 @@
-{% if user.is_authenticated %}
-<div class="alert alert-success" role="alert">
-    <h3>Welcome {{ user.username }}!</h3>
-    <a href="{% url 'logout' %}">Logout?</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +8,6 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 
 <body>
     <div class="container mt-5">
@@ -58,12 +54,4 @@
     </script>
 </body>
 
-
-
-{% else %}
-<div class="alert alert-success" role="alert">
-    <h3>Welcome!</h3>
-    <a href="{% url 'register' %}">Signup</a>
-    <a href="{% url 'login' %}">Login</a>
-</div>
-{% endif %}
+</html>
