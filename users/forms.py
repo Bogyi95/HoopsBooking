@@ -26,4 +26,5 @@ class TeamForm(forms.ModelForm):
         model = Team
         fields = [
             "name",
+            "pin",
         ]
