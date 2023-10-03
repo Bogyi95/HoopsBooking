@@ -1,3 +1,5 @@
+import secrets
+import string
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -35,11 +37,15 @@ def create_team(request):
         form = TeamForm(request.POST)
         if form.is_valid():
             team_name = form.cleaned_data["name"]
+            pin = request.POST.get("pin")
 
             if Team.objects.filter(Q(name__iexact=team_name)).exists():
                 form.add_error("name", "A team with this name already exists.")
             else:
-                form.save()
+                team = form.save(commit=False)
+                team.pin = pin
+                team.save()
+
                 return redirect("home")
     else:
         form = TeamForm()

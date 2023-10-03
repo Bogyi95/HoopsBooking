@@ -44,8 +44,10 @@
                                 <input type="text" class="form-control" id="id_name" name="name" required>
                             </div>
                             <div class="form-group">
-                                <label for="id_name">Team Pin</label>
-                                <input type="text" class="form-control" id="id_pin" name="pin" required>
+                                <label for="id_pin">Team Pin</label>
+                                <input type="text" class="form-control" id="id_pin" name="pin" readonly>
+                                <button type="button" id="generate-pin-btn" class="btn btn-primary">Generate
+                                    PIN</button>
                             </div>
                             <button type="submit" class="btn btn-success">Create</button>
                         </form>
@@ -65,7 +67,7 @@
     </ul>
 
     <!-- Include Bootstrap JavaScript and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- JavaScript to Show the Pop-up -->
@@ -73,6 +75,27 @@
         $(document).ready(function () {
             $("#show-create-team-modal").click(function () {
                 $("#create-team-modal").modal();
+            });
+        });
+    </script>
+    <!-- JavaScript to generate pin on click and save it on the submit button -->
+    <script>
+        $(document).ready(function () {
+            $("#generate-pin-btn").click(function () {
+                // Generate a 4-character random PIN
+                var randomPin = Math.floor(Math.random() * 9000) + 1000;
+
+                // Set the generated PIN in the input field
+                $("#id_pin").val(randomPin);
+            });
+
+            // Intercept the form submission
+            $("form").submit(function (event) {
+                // Add the PIN as a hidden input field before submitting the form
+                $("<input />").attr("type", "hidden")
+                    .attr("name", "pin")
+                    .attr("value", $("#id_pin").val())
+                    .appendTo($(this));
             });
         });
     </script>
